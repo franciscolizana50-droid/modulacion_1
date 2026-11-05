@@ -1,0 +1,70 @@
+STOCK POR MODULACIÓN - APP INSTALABLE (PWA)
+==========================================
+
+1) SUBIR A NETLIFY
+   - Entra a https://app.netlify.com/drop
+   - Arrastra esta CARPETA completa (o el .zip) a la página.
+   - Netlify te entrega un enlace https://algo.netlify.app (puedes cambiarle el nombre en
+     Site configuration > Change site name). Al ser https, la cámara y el escaneo funcionan.
+   - Para actualizar: en Netlify, pestaña Deploys, arrastra la carpeta nueva.
+     (Si cambias el código, sube también el número VERSION de sw.js para que los celulares se actualicen.)
+
+2) INSTALAR EN EL CELULAR O PC
+   - Android / Chrome: abre el enlace > menú ⋮ > "Instalar aplicación" (o "Agregar a pantalla de inicio").
+   - iPhone / Safari: abre el enlace > botón Compartir > "Agregar a pantalla de inicio".
+   - PC con Chrome o Edge: icono de instalar en la barra de direcciones.
+   Después de abrirla una vez con internet, funciona SIN conexión.
+
+3) CARGAR MODULACIONES GUARDADAS (.json)
+   - Botón "Abrir archivo guardado…" (puedes elegir varios .json a la vez).
+   - Las modulaciones quedan en la biblioteca del dispositivo (con la portada).
+
+4) CARGAR DESDE GITHUB CON CONTRASEÑA
+   En la versión PC (o en esta misma app en el computador):
+   a. Abre "Sincronizar con GitHub (cifrado)", escribe una contraseña (mín. 8 caracteres) y pulsa
+      "Exportar toda la biblioteca cifrada" (o solo la modulación abierta). Se descarga un .json cifrado.
+   b. Sube ese .json a tu repositorio de GitHub (Add file > Upload files).
+   c. Abre el archivo en GitHub y copia el enlace de la página (el de "blob") o el de "Raw".
+   En el celular:
+   d. Abre "Sincronizar con GitHub", pega el enlace, escribe la misma contraseña y pulsa "Cargar desde GitHub".
+   - El archivo va cifrado (AES-256-GCM): sin la contraseña no se puede leer, aunque el repositorio sea público.
+   - Repositorio privado: crea un token en GitHub (Settings > Developer settings > Fine-grained tokens,
+     permiso "Contents: Read-only" solo para ese repositorio) y pégalo en el campo Token.
+   - Si marcas "Recordar enlace y contraseña", se guardan sin cifrar en ese dispositivo.
+     El token no se guarda nunca.
+
+5) ESCANEO
+   - "Escanear con cámara": lectura en vivo (requiere https, ya lo da Netlify).
+   - "Foto del código": abre la cámara del celular o elige una imagen.
+
+6) ALTERNATIVA: DEJARLA EN GITHUB (GitHub Pages, gratis)
+   a. Crea un repositorio PÚBLICO en GitHub (por ejemplo "modulaciones").
+      (Pages en repositorios privados requiere un plan de pago.)
+   b. Descomprime el .zip y, en el repositorio, usa Add file > Upload files: arrastra el CONTENIDO de la carpeta
+      (index.html, sw.js, manifest.webmanifest, icons/, vendor/, .nojekyll). Pulsa "Commit changes".
+      No subas el .zip: GitHub no lo descomprime.
+   c. Settings > Pages > "Deploy from a branch" > rama main, carpeta / (root) > Save.
+      En 1 o 2 minutos queda en https://TU-USUARIO.github.io/modulaciones/  (es https: cámara y escaneo funcionan).
+   d. Abre ese enlace en el celular e instálala como en el punto 2.
+   e. Para actualizar: sube los archivos nuevos al repositorio (y sube el número VERSION de sw.js).
+   Importante: el repositorio público muestra el código de la app, pero no tus datos. NO subas .json sin cifrar
+   (traen stock y productos). Sube solo los .json CIFRADOS del punto 4; puedes dejarlos en el mismo repositorio
+   y pegar su enlace (raw o el de GitHub Pages) en "Sincronizar con GitHub".
+
+7) VINCULAR NETLIFY CON GITHUB (se actualiza sola cada vez que subes cambios)
+   a. Sube los archivos de la app a un repositorio de GitHub (puede ser privado), como en el punto 6.b.
+   b. En Netlify: Add new site > Import an existing project > GitHub > autoriza y elige el repositorio.
+   c. Build command: déjalo vacío. Publish directory: deja "." (o vacío). Pulsa Deploy.
+   d. Desde ahí, cada "Commit" en la rama main publica la nueva versión en 1 o 2 minutos.
+   e. Tus .json CIFRADOS también pueden ir en ese repositorio: Netlify los publica junto a la app y los cargas
+      pegando https://TU-SITIO.netlify.app/biblioteca.json (sin token, aunque el repositorio sea privado).
+   Nota: un sitio creado con "arrastrar y soltar" no se puede vincular después; crea uno nuevo desde Git.
+
+8) ANDROID
+   - Usa Chrome: abre el enlace > menú ⋮ > "Instalar aplicación". Queda como una app más y abre sin barra del navegador.
+   - La primera vez que escanees, Chrome pide permiso de cámara: acepta (queda guardado).
+   - Los archivos (PDF, .json) se descargan a la carpeta Descargas. Para abrir un .json guardado usa
+     "Abrir archivo guardado…" y elígelo desde Descargas.
+
+Archivos: index.html (la app), vendor/ (librerías, sin internet), sw.js (funcionamiento sin conexión),
+manifest.webmanifest + icons/ (instalación), _headers (opciones de Netlify).
